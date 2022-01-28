@@ -6,7 +6,7 @@ f_delay()
 }
 
 CURRENT_PROGRESS=0
-progress()
+progressbar()
 {
     PARAM_PROGRESS=$1;
     PARAM_PHASE=$2;
@@ -33,5 +33,16 @@ progress()
     if [ $CURRENT_PROGRESS -le 100 -a $PARAM_PROGRESS -ge 100 ];then echo "Done!                                            \n\c" ; fi;
 
     CURRENT_PROGRESS=$PARAM_PROGRESS;
+}
+
+spinner() {
+  sp='/-\|'
+  printf ' '
+  sleep 1
+  while true; do
+    printf '\r%0.9s' "loading $sp"
+    sp=${sp#?}${sp%???}
+    f_delay
+  done
 }
 
